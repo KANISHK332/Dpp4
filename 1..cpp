@@ -80,3 +80,23 @@ public:
         return dp[0][n-1];
     }
 };
+// palindromic partition
+       int palindromicPartition(string str)
+    {
+        // code here
+        int n= str.size();
+        int c[n];
+        bool pal[n][n];
+        memset(pal,false,sizeof(pal));
+        for(int i=0;i<n;i++){
+            int mc= i;
+            for(int j=0;j<=i;j++){
+                if(str[i]==str[j]&&(i-j<2||pal[j+1][i-1])){
+                    pal[j][i]=true;
+                    mc= min(mc,j == 0? 0 : (c[j - 1] + 1));
+                }
+            }
+            c[i]=mc;
+            }
+            return c[n-1];
+    }
